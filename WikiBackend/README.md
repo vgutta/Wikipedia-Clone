@@ -32,7 +32,7 @@ Models (typescript):
 ```
 interface Section {
   title: string;
-  html: string;
+  content: string;
 }
 
 interface Page {
