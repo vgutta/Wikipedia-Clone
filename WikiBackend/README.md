@@ -1,5 +1,7 @@
 Routes:
+=====
 
+```
 PUSH /api/pages
 - Create a new page
 GET  /api/pages
@@ -22,3 +24,23 @@ GET  /api/images/5
 - Get the image data of image 5
 DELETE /api/images/5
 - Delete the image
+```
+
+Models (typescript):
+=====
+
+```
+interface Section {
+  title: string;
+  html: string;
+}
+
+interface Page {
+  name: string;
+  sections: Section[];
+}
+
+type Image = string;
+// Image does not have a model; all it is is the id string.
+// To display an image, use <img src="/api/images/{{id}}"></img>
+```
