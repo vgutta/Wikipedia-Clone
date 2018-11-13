@@ -2,7 +2,7 @@ Routes:
 =====
 
 ```
-PUSH /api/pages
+POST /api/pages
 - Create a new page
 GET  /api/pages
 - List all pages
@@ -15,7 +15,7 @@ PUT /api/pages/blah
 DELETE /api/pages/blah
 - Delete the page named "blah"
 
-PUSH /api/images
+POST /api/images
 - Upload a new image
 - Returns the id of the image
 GET  /api/images

@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
+const Router = require('./router.js');
 
-app.get('/', (req, res) => {
-    res.send('Hello, world!');
-});
+Router.addRoutes(app);
 
 app.listen(3542);
 
