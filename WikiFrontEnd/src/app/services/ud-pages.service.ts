@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //import { UDPage } from '../models/ud-pages';
 import { Page } from '../models/ud-pages';
+import { Test } from '../models/ud-pages';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +18,10 @@ export class UdPagesService {
   // }
 
   getAllPages(): Observable<Page> {
-    return this.http.get<Page>('http://localhost:3542/');
+    return this.http.get<Page>('http://localhost:3542/api/pages/b');
+  }
+  getTestPages(): Observable<Test> {
+    return this.http.get<Test>('http://localhost:3542/');
   }
 
 }
