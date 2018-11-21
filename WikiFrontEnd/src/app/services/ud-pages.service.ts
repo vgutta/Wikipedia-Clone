@@ -16,7 +16,7 @@ export class UdPagesService {
   // }
 
   getAllPages(): Observable<Page> {
-    return this.http.get<Page>('https://localhost:3542/api/pages');
+    return this.http.get<Page>('http://localhost:3542/');
   }
 
 }

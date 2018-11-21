@@ -16,6 +16,18 @@
               <th>Description</th>
               <th>Link</th>
             </thead>
+            <tbody> 
+              <h2>Here's the data: <span *ngIf="!(page$ | async)">loading...</span></h2>
+              <pre *ngIf="page$ | async">{{ page$ | async | json }}</pre>
+              {{ page$ | async | json }}
+              <!-- <tr *ngFor="let entry of (Page$ | async)?.entries ">
+                <td>{{entry.title}}</td>
+                <td>{{entry.description}}</td>
+                <td>
+                  <a [href]="entry.Link" target="_blank">{{entry.Link}}</a>
+                </td>               
+              </tr> -->
+            </tbody> 
             <tbody>
             </tbody>  
           </table>
