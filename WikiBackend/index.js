@@ -1,10 +1,8 @@
 const express = require('express');
 const Router = require('./router.js');
-const mongoose = require('mongoose');
+const { setupMongoose } = require('./setup-mongoose');
 
-mongoose.connect('mongodb://localhost/wiki');
-
-console.log('Connected to Mongo database.');
+setupMongoose();
 
 const app = express();
 
