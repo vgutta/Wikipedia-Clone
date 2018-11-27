@@ -1,3 +1,5 @@
+const { Page } = require('../models/page');
+
 function isValidPageName(pageName) {
   return (
     pageName &&
@@ -61,7 +63,13 @@ function putPage(res, pageName, pageData) {
 function postPage(res, pageData) {
   if (!isValidPageData(pageData)) return res.status(400).send();
 
-  res.status(201).send();
+  const newPage = new Page();
+  Object.assign(newPage, pageData);
+  newPage.save(err => {
+    if (err) res.status(500).send(err.toString());
+    console.log('done');
+    res.status(201).send();
+  });
 }
 
 function deletePage(res, pageName) {
