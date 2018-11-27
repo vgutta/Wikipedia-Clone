@@ -31,27 +31,20 @@ function isValidSection(section) {
 
 
 function getListing(res) {
-  res.send(JSON.stringify(['test-page']));
+  Page.find({}, {name: true}, (err, pages) => {
+    if (err) return res.status(500).send(err.toString());
+    return res.json(pages.map(x => x.name));
+  });
 }
 
 function getPage(res, pageName) {
   if (!isValidPageName(pageName)) return res.status(400).send();
 
-  res.json({
-    name: pageName,
-    sections: [
-      {
-        title: 'Intro',
-        content: '<h1>Test Page!</h1><p>This is a test page.</p>'
-      }, {
-        title: 'Another Section',
-        content: '<p>Here\'s another section.</p>'
-      }, {
-        title: 'Yet another',
-        content: '<p>And another.</p>'
-      }
-    ]
-  });
+  Page.findOne({ name: pageName }, (err, page) => {
+    if (err) return res.status(500).send(err.toString());
+    if (page === null) return res.status(404).send();
+    return res.json(page);
+  })
 }
 
 function putPage(res, pageName, pageData) {
