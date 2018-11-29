@@ -8,6 +8,9 @@ import { LandingComponent } from './components/landing/landing.component';
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { RouterModule, Routes } from '@angular/router';
 
+//Imports Avatar Module
+import { AvatarModule } from 'ngx-avatar';
+
 //Declares Routes for components
 const appRoutes: Routes = [
   { path: 'components/about-page', component: AboutPageComponent },
@@ -29,7 +32,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: true} //debugging purposes only
-    )
+    ),
+    AvatarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
