@@ -29,6 +29,9 @@ function isValidSection(section) {
   )
 }
 
+function internalServerError(res) {
+  return err => res.status(500).send(err);
+}
 
 function getListing(res) {
   Page.find({}, {name: true}, (err, pages) => {
@@ -61,16 +64,19 @@ function putPage(res, pageName, pageData) {
   })
 }
 
-function postPage(res, pageData) {
+async function postPage(res, pageData) {
   if (!isValidPageData(pageData)) return res.status(400).send();
 
+  const preexisting = await Page.findOne({ name: pageData.name })
+    .catch(internalServerError(res));
+
+  if (preexisting !== null) return res.status(409).send();
   const newPage = new Page();
   Object.assign(newPage, pageData);
-  newPage.save(err => {
-    if (err) res.status(500).send(err.toString());
-    console.log('done');
-    res.status(201).send();
-  });
+  const err = await newPage.save()
+    .catch(internalServerError(res));
+
+  res.status(201).send();
 }
 
 function deletePage(res, pageName) {
