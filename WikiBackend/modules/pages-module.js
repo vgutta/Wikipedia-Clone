@@ -48,9 +48,17 @@ function getPage(res, pageName) {
 }
 
 function putPage(res, pageName, pageData) {
-  if (!isValidPageName(pageName) || !isValidPageData(pageData)) return res.status(400).send();
+  if (!isValidPageName(pageName) || !isValidPageData(pageData) || pageData.name !== pageName) return res.status(400).send();
 
-  res.status(204).send();
+  Page.findOne({ name: pageName }, (err, page) => {
+    if (err) return res.status(500).send(err.toString());
+    if (page === null) return res.status(404).send();
+    Object.assign(page, pageData);
+    page.save(err => {
+      if (err) return res.status(500).send(err.toString());
+      res.status(204).send();
+    });
+  })
 }
 
 function postPage(res, pageData) {
