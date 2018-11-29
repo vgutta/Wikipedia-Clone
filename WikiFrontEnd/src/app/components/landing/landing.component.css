@@ -1,0 +1,27 @@
+.inputForm{
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+ }
+
+.search-bar{
+    width: 50%;
+    margin-right:10px;
+}
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 1000px) {
+    .search-bar{
+        width: 75%;
+    }
+  }
+
+button,input{
+    height:40px;
+    margin: 20px;
+}
+
+.title{
+ margin: 20px;
+}
+
