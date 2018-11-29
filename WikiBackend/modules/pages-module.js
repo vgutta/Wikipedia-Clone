@@ -88,7 +88,7 @@ async function deletePage(res, pageName) {
   const pageToRemove = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
 
-  if (pageToRemove === null) res.status(404).send();
+  if (pageToRemove === null) return res.status(404).send();
 
   await pageToRemove.remove()
     .catch(internalServerError(res));
