@@ -30,38 +30,41 @@ function isValidSection(section) {
 }
 
 function internalServerError(res) {
-  return err => res.status(500).send(err);
+  // internalServerError returns an anonymous function.
+  // The function will, using the res argument to internalServerError,
+  // send a 500 response with the anonymous argument toString.
+  return err => res.status(500).send(err.toString());
 }
 
-function getListing(res) {
-  Page.find({}, {name: true}, (err, pages) => {
-    if (err) return res.status(500).send(err.toString());
-    return res.json(pages.map(x => x.name));
-  });
+async function getListing(res) {
+  const pages = await Page.find({}, {name: true})
+    .catch(internalServerError(res));
+
+  return res.json(pages.map(x => x.name));
 }
 
-function getPage(res, pageName) {
+async function getPage(res, pageName) {
   if (!isValidPageName(pageName)) return res.status(400).send();
 
-  Page.findOne({ name: pageName }, (err, page) => {
-    if (err) return res.status(500).send(err.toString());
-    if (page === null) return res.status(404).send();
-    return res.json(page);
-  })
+  const page = await Page.findOne({ name: pageName })
+    .catch(internalServerError(res));
+
+  if (page === null) return res.status(404).send();
+  return res.json(page);
 }
 
-function putPage(res, pageName, pageData) {
+async function putPage(res, pageName, pageData) {
   if (!isValidPageName(pageName) || !isValidPageData(pageData) || pageData.name !== pageName) return res.status(400).send();
 
-  Page.findOne({ name: pageName }, (err, page) => {
-    if (err) return res.status(500).send(err.toString());
-    if (page === null) return res.status(404).send();
-    Object.assign(page, pageData);
-    page.save(err => {
-      if (err) return res.status(500).send(err.toString());
-      res.status(204).send();
-    });
-  })
+  const page = await Page.findOne({ name: pageName })
+    .catch(internalServerError(res));
+
+  if (page === null) return res.status(404).send();
+  Object.assign(page, pageData);
+  await page.save()
+    .catch(internalServerError(res));
+
+  return res.status(204).send();
 }
 
 async function postPage(res, pageData) {
