@@ -29,7 +29,7 @@ module.exports.addRoutes = (app) => {
   app.delete('/api/pages/:name', (req, res) => PagesModule.deletePage(res, req.params.name) );
 
   /* ===== images ===== */
-  app.post('/api/images', (req, res) => ImagesModule.postImage(res, req.body));
+  app.post('/api/images', bodyParser.raw({ type: () => true }), (req, res) => ImagesModule.postImage(res, req.headers['content-type'], req.body));
   app.get('/api/images', (req, res) => ImagesModule.getAllImages(res) );
   app.get('/api/images/:id', (req, res) => ImagesModule.getImage(res, req.params.id) );
   app.delete('/api/images/:id', (req, res) => ImagesModule.deleteImage(res, req.params.id) );
