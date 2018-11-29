@@ -1,4 +1,9 @@
+const bodyParser = require('body-parser');
+const PagesModule = require('./modules/pages-module');
+const ImagesModule = require('./modules/images-module');
+
 module.exports.addRoutes = (app) => {
+<<<<<<< HEAD
 
   app.all('/api/pages/:name', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -10,44 +15,25 @@ module.exports.addRoutes = (app) => {
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next()
   });
+=======
+  // Automatically parse JSON from http body
+  app.use(bodyParser.json({ extended: false}));
+
+>>>>>>> master
   app.get('/', (req, res) => {
     res.send('WikiBackend, v0.1\n');
   });
 
   /* ===== pages ===== */
-  app.get('/api/pages', (req, res) => {
-    res.send(JSON.stringify(['test-page']));
-  });
-  app.post('/api/pages', (req, res) => res.send() );
-  app.get('/api/pages/:name', (req, res) => {
-    res.send(JSON.stringify({
-      name: req.params.name,
-      sections: [
-        {
-          title: 'Intro',
-          content: '<h1>Test Page!</h1><p>This is a test page.</p>'
-        }, {
-          title: 'Another Section',
-          content: '<p>Here\'s another section.</p>'
-        }, {
-          title: 'Yet another',
-          content: '<p>And another.</p>'
-        }
-      ]
-    }));
-  });
-  app.put('/api/pages/:name', (req, res) => res.send() );
-  app.delete('/api/pages/:name', (req, res) => res.send() );
+  app.get('/api/pages', (req, res) => PagesModule.getListing(res));
+  app.post('/api/pages', (req, res) => PagesModule.postPage(res, req.body) );
+  app.get('/api/pages/:name', (req, res) => PagesModule.getPage(res, req.params.name));
+  app.put('/api/pages/:name', (req, res) => PagesModule.putPage(res, req.params.name, req.body) );
+  app.delete('/api/pages/:name', (req, res) => PagesModule.deletePage(res, req.params.name) );
 
   /* ===== images ===== */
-  app.post('/api/images', (req, res) => res.send());
-  app.get('/api/images', (req, res) => {
-    res.send(JSON.stringify([
-      '1ab23c4d5e6f',
-      '6f5e4d3c2b1a'
-    ]));
-  });
-  app.get('/api/images/:id', (req, res) => {
-    res.sendFile(__dirname + '/testimage.png');
-  });
+  app.post('/api/images', (req, res) => ImagesModule.postImage(res, req.body));
+  app.get('/api/images', (req, res) => ImagesModule.getAllImages(res) );
+  app.get('/api/images/:id', (req, res) => ImagesModule.getImage(res, req.params.id) );
+  app.delete('/api/images/:id', (req, res) => ImagesModule.deleteImage(res, req.params.id) );
 }

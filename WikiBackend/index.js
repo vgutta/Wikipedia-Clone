@@ -1,6 +1,10 @@
 const express = require('express');
-const app = express();
 const Router = require('./router.js');
+const { setupMongoose } = require('./setup-mongoose');
+
+setupMongoose();
+
+const app = express();
 
 Router.addRoutes(app);
 
