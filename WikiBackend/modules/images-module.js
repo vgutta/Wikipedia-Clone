@@ -12,8 +12,6 @@ function internalServerError(res) {
 }
 
 async function postImage(res, contentType, imageData) {
-  console.log(imageData);
-
   const img = new Image();
   img.contentType = contentType;
   img.data = imageData;
