@@ -82,8 +82,16 @@ async function postPage(res, pageData) {
   res.status(201).send();
 }
 
-function deletePage(res, pageName) {
-  if (!isValidPaegName(pageName)) return res.status(400).send();
+async function deletePage(res, pageName) {
+  if (!isValidPageName(pageName)) return res.status(400).send();
+
+  const pageToRemove = await Page.findOne({ name: pageName })
+    .catch(internalServerError(res));
+
+  if (pageToRemove === null) res.status(404).send();
+
+  await pageToRemove.remove()
+    .catch(internalServerError(res));
 
   res.status(204).send();
 }
