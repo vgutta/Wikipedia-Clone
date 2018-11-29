@@ -29,51 +29,69 @@ function isValidSection(section) {
   )
 }
 
-
-function getListing(res) {
-  res.send(JSON.stringify(['test-page']));
+function internalServerError(res) {
+  // internalServerError returns an anonymous function.
+  // The function will, using the res argument to internalServerError,
+  // send a 500 response with the anonymous argument toString.
+  return err => res.status(500).send(err.toString());
 }
 
-function getPage(res, pageName) {
+async function getListing(res) {
+  const pages = await Page.find({}, {name: true})
+    .catch(internalServerError(res));
+
+  return res.json(pages.map(x => x.name));
+}
+
+async function getPage(res, pageName) {
   if (!isValidPageName(pageName)) return res.status(400).send();
 
-  res.json({
-    name: pageName,
-    sections: [
-      {
-        title: 'Intro',
-        content: '<h1>Test Page!</h1><p>This is a test page.</p>'
-      }, {
-        title: 'Another Section',
-        content: '<p>Here\'s another section.</p>'
-      }, {
-        title: 'Yet another',
-        content: '<p>And another.</p>'
-      }
-    ]
-  });
+  const page = await Page.findOne({ name: pageName })
+    .catch(internalServerError(res));
+
+  if (page === null) return res.status(404).send();
+  return res.json(page);
 }
 
-function putPage(res, pageName, pageData) {
-  if (!isValidPageName(pageName) || !isValidPageData(pageData)) return res.status(400).send();
+async function putPage(res, pageName, pageData) {
+  if (!isValidPageName(pageName) || !isValidPageData(pageData) || pageData.name !== pageName) return res.status(400).send();
 
-  res.status(204).send();
+  const page = await Page.findOne({ name: pageName })
+    .catch(internalServerError(res));
+
+  if (page === null) return res.status(404).send();
+  Object.assign(page, pageData);
+  await page.save()
+    .catch(internalServerError(res));
+
+  return res.status(204).send();
 }
 
-function postPage(res, pageData) {
+async function postPage(res, pageData) {
   if (!isValidPageData(pageData)) return res.status(400).send();
 
+  const preexisting = await Page.findOne({ name: pageData.name })
+    .catch(internalServerError(res));
+
+  if (preexisting !== null) return res.status(409).send();
   const newPage = new Page();
   Object.assign(newPage, pageData);
-  newPage.save(err => {
-    if (err) res.status(500).send(err.toString());
-    console.log('done');
-    res.status(201).send();
-  });
+  const err = await newPage.save()
+    .catch(internalServerError(res));
+
+  res.status(201).send();
 }
 
-function deletePage(res, pageName) {
-  if (!isValidPaegName(pageName)) return res.status(400).send();
+async function deletePage(res, pageName) {
+  if (!isValidPageName(pageName)) return res.status(400).send();
+
+  const pageToRemove = await Page.findOne({ name: pageName })
+    .catch(internalServerError(res));
+
+  if (pageToRemove === null) res.status(404).send();
+
+  await pageToRemove.remove()
+    .catch(internalServerError(res));
 
   res.status(204).send();
 }

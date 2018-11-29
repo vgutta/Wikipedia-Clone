@@ -15,7 +15,7 @@ module.exports.addRoutes = (app) => {
   app.post('/api/pages', (req, res) => PagesModule.postPage(res, req.body) );
   app.get('/api/pages/:name', (req, res) => PagesModule.getPage(res, req.params.name));
   app.put('/api/pages/:name', (req, res) => PagesModule.putPage(res, req.params.name, req.body) );
-  app.delete('/api/pages/:name', (req, res) => PagesModule.deletePage(res, req.params) );
+  app.delete('/api/pages/:name', (req, res) => PagesModule.deletePage(res, req.params.name) );
 
   /* ===== images ===== */
   app.post('/api/images', (req, res) => ImagesModule.postImage(res, req.body));
