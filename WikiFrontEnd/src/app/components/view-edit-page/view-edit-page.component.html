@@ -1,0 +1,15 @@
+<ng-template [ngIf]="page | async" [ngIfElse]="loading">
+
+
+  <h2>{{ (page | async).name }}</h2>
+
+  <section *ngFor="let section of (page | async).sections">
+    <h3>{{ section.title }}</h3>
+    <markdown [data]="section.content"></markdown>
+  </section>
+
+
+</ng-template>
+<ng-template #loading>
+  Loading...
+</ng-template>
