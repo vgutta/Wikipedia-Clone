@@ -19,6 +19,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
+import { TrendingPipe } from './components/landing/trending.pipe';
 
 //Declares Routes for components
 const appRoutes: Routes = [
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     FilterPipe,
     ViewEditPageComponent,
     ViewEditSectionComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    TrendingPipe
   ],
   imports: [
     ReactiveFormsModule,
