@@ -13,8 +13,8 @@
         <th>Title</th>
       </thead>
       <tbody> 
-        <tr *ngFor="let entry of page$ | async | filter: search">
-          <td>{{entry}}</td>          
+        <tr *ngFor="let entry of page$ | async | trending">
+          <td>{{entry.name}}</td>          
         </tr>
       </tbody> 
       <tbody>
