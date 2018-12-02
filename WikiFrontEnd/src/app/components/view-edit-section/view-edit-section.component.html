@@ -1,0 +1,22 @@
+<mat-card #theCard [style.maxWidth]="isOpen ? '2000px' : '1000px'">
+  <mat-card-content>
+    <mat-drawer-container autosize>
+      <mat-drawer [opened]="isOpen" mode="side" position="end" (openedStart)="isOpen = true" (closedStart)="isOpen = false">
+        <div #theDrawer>
+          <form>
+            <mat-form-field style='width: 100%' #theTextarea>
+              <textarea matInput name="section-content" [(ngModel)]="section.content" cdkTextareaAutosize cdkAutosizeMinRows="5" (ngModelChange)="updateHeight()"></textarea>
+            </mat-form-field>
+          </form>
+          <button mat-button (click)="changeDrawer(false)">Close</button>
+        </div>
+      </mat-drawer>
+
+      <div id='setHeightWrapper' [style.minHeight]="minHeight">
+        <button mat-button (click)="changeDrawer(true)" *ngIf="!isOpen" style="float: right;">EDIT</button>
+        <mat-card-title>{{ section.title }}</mat-card-title>
+        <markdown [data]="section.content"></markdown>
+      </div>
+    </mat-drawer-container>
+  </mat-card-content>
+</mat-card>

@@ -8,17 +8,20 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { FilterPipe} from './components/landing/filter.pipe';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule, MatInputModule, MatSidenavModule, MatButtonModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ViewEditPageComponent } from './components/view-edit-page/view-edit-page.component';
 import { RetrievePageResolve } from './guards/retrieve-page-resolver.service';
+import { ViewEditSectionComponent } from './components/view-edit-section/view-edit-section.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     FilterPipe,
-    ViewEditPageComponent
+    ViewEditPageComponent,
+    ViewEditSectionComponent
   ],
   imports: [
     HttpClientModule,
@@ -28,6 +31,9 @@ import { RetrievePageResolve } from './guards/retrieve-page-resolver.service';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
+    MatSidenavModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot()
   ],
