@@ -23,4 +23,8 @@ export class UdPagesService {
     return this.http.get<Page>(`http://localhost:3542/api/pages/${pageName}`);
   }
 
+  updatePage(pageName: string, pageData: Page) {
+    return this.http.put<Page>(`http://localhost:3542/api/pages/${pageName}`, pageData, { headers: {contentType: 'text/json'}});
+  }
+
 }

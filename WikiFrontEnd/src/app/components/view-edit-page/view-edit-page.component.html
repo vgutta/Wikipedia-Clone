@@ -3,7 +3,9 @@
 
   <h2>{{ (page | async).name }}</h2>
 
-  <app-view-edit-section *ngFor="let section of (page | async).sections" [section]="section">
+  <app-view-edit-section *ngFor="let section of (page | async).sections; let i = index"
+    [section]="section"
+    (saveModification)="sectionChanged(i, $event)">
   </app-view-edit-section>
 
 
