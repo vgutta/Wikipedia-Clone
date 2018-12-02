@@ -37,10 +37,10 @@ function internalServerError(res) {
 }
 
 async function getListing(res) {
-  const pages = await Page.find({}, {name: true})
+  const pages = await Page.find({}, {name: true, pagevisits: true})
     .catch(internalServerError(res));
 
-  return res.json(pages.map(x => x.name));
+  return res.json(pages);
 }
 
 async function getPage(res, pageName) {
