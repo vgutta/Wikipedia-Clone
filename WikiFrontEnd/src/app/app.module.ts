@@ -11,15 +11,15 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
+import { AuthService } from './auth/auth.service';
+import { CallbackComponent } from './callback/callback.component';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
 
 //Declares Routes for components
 const appRoutes: Routes = [
-  { path: 'components/about-page', component: AboutPageComponent },
-  { path: 'components/login', component: LoginComponent},
+  { path: 'components/about-page', component: AboutPageComponent }
 ];
 
 
@@ -30,7 +30,7 @@ const appRoutes: Routes = [
     LandingComponent,
     FilterPipe,
     AboutPageComponent,
-    LoginComponent
+    CallbackComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -48,7 +48,7 @@ const appRoutes: Routes = [
     ),
     AvatarModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
