@@ -49,6 +49,15 @@ async function getPage(res, pageName) {
   const page = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
 
+  if(!page.pagevisits){
+    page.pagevisits = 1;
+  } else {
+    page.pagevisits++;
+  }
+  
+  await page.save()
+    .catch(internalServerError(res));
+
   if (page === null) return res.status(404).send();
   return res.json(page);
 }
