@@ -16,6 +16,7 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
   public minHeight = '0px';
   public modified = false;
   @Output() saveModification: EventEmitter<ViewEditSectionComponent> = new EventEmitter();
+  @Output() saveDeletion: EventEmitter<ViewEditSectionComponent> = new EventEmitter();
 
   constructor(private ngZone: NgZone) { }
 
@@ -40,6 +41,10 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
 
   save() {
     this.saveModification.emit(this);
+  }
+
+  delete() {
+    this.saveDeletion.emit(this);
   }
 
   finishSave() {

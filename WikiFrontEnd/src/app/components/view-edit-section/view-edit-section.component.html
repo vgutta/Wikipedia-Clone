@@ -6,6 +6,7 @@
           <form>
             <button mat-button (click)="cancel()">Cancel</button>
             <button mat-button (click)="save()" [disabled]="!modified">Save</button>
+            <button mat-raised-button color="warn" (click)="delete()" style='float: right'>Delete</button>
             <mat-form-field style="width: 100%">
               <input matInput name="section-title" type='text' placeholder="Section Title" [(ngModel)]="current.title" (ngModelChange)="contentChanged()" />
             </mat-form-field>

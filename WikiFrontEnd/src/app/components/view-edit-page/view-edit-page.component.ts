@@ -42,4 +42,17 @@ export class ViewEditPageComponent implements OnInit {
       });
   }
 
+  deleteSection(index: number) {
+    const newData: Page = {
+      name: this.latest.name,
+      sections: Array.from(this.latest.sections)
+    };
+    newData.sections.splice(index, 1);
+
+    this.pagesService.updatePage(newData.name, newData)
+      .subscribe(() => {
+        this.latest.sections.splice(index, 1);
+      });
+  }
+
 }
