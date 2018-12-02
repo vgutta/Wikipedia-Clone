@@ -26,12 +26,20 @@ export class ViewEditPageComponent implements OnInit {
   }
 
   sectionChanged(index: number, editor: ViewEditSectionComponent) {
-    const newData: Page = Object.assign({}, this.latest); // Shallow clone page
-    newData.sections = Array.from(newData.sections); // Shallow clone sections
-    newData.sections[index] = editor.current;
+    const newData: Page = {
+      name: this.latest.name,
+      sections: Array.from(this.latest.sections) // shallow clone
+    };
+    newData.sections[index] = {
+      title: editor.current.title,
+      content: editor.current.content
+    };
 
     this.pagesService.updatePage(newData.name, newData)
-      .subscribe(() => editor.finishSave());
+      .subscribe(() => {
+        editor.finishSave();
+        this.latest.sections[index] = editor.current;
+      });
   }
 
 }
