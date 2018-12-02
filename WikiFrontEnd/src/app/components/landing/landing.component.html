@@ -2,16 +2,9 @@
   <h1 class="text-center ">Wikipedia Clone</h1>
   <img src="../assets/images/enwiki.png" class="mx-auto d-block" alt="">
     <form class="d-flex justify-content-center" >
-      <mat-form-field class="example-full-width">
           <div class="search-bar">
               <input name = "search" [(ngModel)]="search" type="text" id="search" class="form-control " [matAutocomplete]="auto" matInput>
             </div>
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let entry of page$ | async " [value]="entry">
-              {{entry}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
       
       <button class="btn btn-lg btn-primary"><div class="d-flex justify-content-center"><i class="fas fa-search "></i></div></button>
     </form>
