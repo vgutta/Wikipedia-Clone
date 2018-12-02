@@ -1,0 +1,28 @@
+mat-card {
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1000px;
+  transition: max-width 0.25s ease-out;
+}
+
+mat-drawer-container {
+  background-color: transparent;
+}
+
+mat-drawer {
+  width: 50%;
+}
+
+* {
+  overflow: hidden;
+}
+
+#setHeightWrapper {
+  transition: min-height 0.25s ease-out;
+}
+
+textarea {
+  overflow: hidden !important;
+}
