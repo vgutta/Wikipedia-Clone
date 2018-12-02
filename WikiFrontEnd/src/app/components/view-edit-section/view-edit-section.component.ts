@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { Section } from 'src/app/models/ud-pages';
 import { MatDrawer } from '@angular/material';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-edit-section',
@@ -14,7 +15,7 @@ export class ViewEditSectionComponent implements OnInit {
   public isOpen = false;
   public minHeight = '0px';
 
-  constructor() { }
+  constructor(private ngZone: NgZone) { }
 
   ngOnInit() {
   }
@@ -25,11 +26,13 @@ export class ViewEditSectionComponent implements OnInit {
   }
 
   updateHeight() {
-    if (this.isOpen) {
-      this.minHeight = this.theDrawer.nativeElement.offsetHeight + 'px';
-    } else {
-      this.minHeight = '0px';
-    }
+    this.ngZone.onStable.pipe(take(1)).subscribe(() => {
+      if (this.isOpen) {
+        this.minHeight = this.theDrawer.nativeElement.offsetHeight + 'px';
+      } else {
+        this.minHeight = '0px';
+      }
+    });
   }
 
 }
