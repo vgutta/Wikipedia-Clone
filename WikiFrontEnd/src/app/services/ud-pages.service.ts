@@ -20,28 +20,7 @@ export class UdPagesService {
   }
 
   getPage(pageName: string): Observable<Page> {
-    return of({
-      'name': 'test-page',
-      'sections': [
-        {
-          'title': 'Intro',
-          'content': 'Here is *one star*, **two stars** and ***three stars***, and a backslashed \\*'
-        },
-        {
-          'title': 'Another Section',
-          'content': '<p>Here\'s another section.</p>'
-        },
-        {
-          'title': 'Yet another',
-          'content': '<p>And another.</p>'
-        },
-        {
-          'title': 'The Fourth',
-          'content': '<p>A fourth section!</p>'
-        }
-      ]
-    });
-//    return this.http.get<Page>(`http://localhost:3542/api/pages/${pageName}`);
+    return this.http.get<Page>(`http://localhost:3542/api/pages/${pageName}`);
   }
 
 }
