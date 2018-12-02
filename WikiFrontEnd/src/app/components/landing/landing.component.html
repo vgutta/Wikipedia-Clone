@@ -2,16 +2,9 @@
   <h1 class="text-center ">Wikipedia Clone</h1>
   <img src="../assets/images/enwiki.png" class="mx-auto d-block" alt="">
     <form class="d-flex justify-content-center" >
-      <mat-form-field class="example-full-width">
           <div class="search-bar">
               <input name = "search" [(ngModel)]="search" type="text" id="search" class="form-control " [matAutocomplete]="auto" matInput>
             </div>
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let entry of (page$ | async)?.sections | filter: search " [value]="entry.title">
-              {{entry.title}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
       
       <button class="btn btn-lg btn-primary"><div class="d-flex justify-content-center"><i class="fas fa-search "></i></div></button>
     </form>
@@ -20,8 +13,8 @@
         <th>Title</th>
       </thead>
       <tbody> 
-        <tr *ngFor="let entry of (page$ | async)?.sections | filter: search ">
-          <td>{{entry.title}}</td>          
+        <tr *ngFor="let entry of page$ | async | filter: search">
+          <td>{{entry}}</td>          
         </tr>
       </tbody> 
       <tbody>
@@ -47,3 +40,11 @@
         </div>
       </div>
 </div>
+<!-- <mat-form-field >
+  <input type="text" matInput [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of page$ | async" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field> -->

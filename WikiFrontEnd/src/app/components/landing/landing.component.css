@@ -7,7 +7,7 @@
 .search-bar{
     width: 50%;
     margin-right:10px;
-}
+} 
 
 /* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 1000px) {
@@ -24,4 +24,3 @@ button,input{
 .title{
  margin: 20px;
 }
-

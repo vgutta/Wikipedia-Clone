@@ -12,8 +12,8 @@ export class UdPagesService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPages(): Observable<Page> {
-    return this.http.get<Page>('http://localhost:3542/api/pages/b');
+  getAllPages(): Observable<Page[]> {
+    return this.http.get<Page[]>('http://localhost:3542/api/pages/');
   }
   getTestPages(): Observable<Test> {
     return this.http.get<Test>('http://localhost:3542/');
