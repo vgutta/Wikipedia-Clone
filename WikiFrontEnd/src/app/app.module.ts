@@ -14,6 +14,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ViewEditPageComponent } from './components/view-edit-page/view-edit-page.component';
 import { RetrievePageResolve } from './guards/retrieve-page-resolver.service';
 import { ViewEditSectionComponent } from './components/view-edit-section/view-edit-section.component';
+import { AboutPageComponent } from './components/about-page/about-page.component';
+import { RouterModule, Routes } from '@angular/router';
+
+//Imports Avatar Module
+import { AvatarModule } from 'ngx-avatar';
+
+//Declares Routes for components
+const appRoutes: Routes = [
+  { path: 'components/about-page', component: AboutPageComponent },
+];
+
+
 
 @NgModule({
   declarations: [
@@ -21,7 +33,8 @@ import { ViewEditSectionComponent } from './components/view-edit-section/view-ed
     LandingComponent,
     FilterPipe,
     ViewEditPageComponent,
-    ViewEditSectionComponent
+    ViewEditSectionComponent,
+    AboutPageComponent
   ],
   imports: [
     HttpClientModule,
@@ -35,7 +48,12 @@ import { ViewEditSectionComponent } from './components/view-edit-section/view-ed
     MatSidenavModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    RouterModule.forRoot(
+      appRoutes,
+      {enableTracing: true} // debugging purposes only
+    ),
+    AvatarModule
   ],
   providers: [
     RetrievePageResolve
