@@ -14,6 +14,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
+import { BrowseComponent } from './components/browse/browse.component';
 
 //Declares Routes for components
 const appRoutes: Routes = [
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
     AppComponent,
     LandingComponent,
     FilterPipe,
-    AboutPageComponent
+    AboutPageComponent,
+    BrowseComponent
   ],
   imports: [
     ReactiveFormsModule,
