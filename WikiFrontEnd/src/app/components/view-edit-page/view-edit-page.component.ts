@@ -57,7 +57,7 @@ export class ViewEditPageComponent implements OnInit {
 
   addSection() {
     this.latest.sections.push(
-      {title: 'New Section', content: 'Add content to your section here!\nYou can even use ***markdown*** styling!'}
+      {title: '', content: ''}
     );
   }
 

@@ -14,7 +14,7 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
   current: Section;
   public isOpen = false;
   public minHeight = '0px';
-  public modified = false;
+  public saveable = false;
   @Output() saveModification: EventEmitter<ViewEditSectionComponent> = new EventEmitter();
   @Output() saveDeletion: EventEmitter<ViewEditSectionComponent> = new EventEmitter();
 
@@ -26,6 +26,9 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.section) {
       this.current = Object.assign({}, this.section);
+      if (this.current.title === '' && this.current.content === '') {
+        this.changeDrawer(true);
+      }
     }
   }
 
@@ -35,8 +38,12 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
   }
 
   cancel() {
-    this.current = Object.assign({}, this.section);
-    this.changeDrawer(false);
+    if (this.section.title === '' || this.section.content === '') {
+      this.delete();
+    } else {
+      this.current = Object.assign({}, this.section);
+      this.changeDrawer(false);
+    }
   }
 
   save() {
@@ -54,7 +61,13 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
   }
 
   contentChanged() {
-    this.modified = !(this.current.title === this.section.title && this.current.content === this.section.content);
+    this.saveable = (
+      (
+        this.current.title !== this.section.title ||
+        this.current.content !== this.section.content
+      ) &&
+      this.current.title !== '' &&
+      this.current.content !== '');
     this.updateHeight();
   }
 
