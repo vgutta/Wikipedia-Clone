@@ -17,6 +17,6 @@ export interface Page {
 export interface Test {
 }
 
-type Image = string;
+export type Image = string;
 // Image does not have a model; all it is is the id string.
 // To display an image, use <img src="/api/images/{{id}}"></img>

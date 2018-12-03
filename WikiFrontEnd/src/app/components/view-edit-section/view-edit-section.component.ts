@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, NgZone, SimpleChanges, OnChanges, Output, EventEmitter } from '@angular/core';
-import { Section } from 'src/app/models/ud-pages';
+import { Section, Image } from 'src/app/models/ud-pages';
 import { take } from 'rxjs/operators';
+import { MatInput, MatDialog } from '@angular/material';
+import { ChooseImageDialog } from '../choose-image-dialog/choose-image.dialog';
 
 @Component({
   selector: 'app-view-edit-section',
@@ -9,7 +11,7 @@ import { take } from 'rxjs/operators';
 })
 export class ViewEditSectionComponent implements OnInit, OnChanges {
   @ViewChild('theDrawer') theDrawer: ElementRef<HTMLDivElement>;
-  @ViewChild('theTextarea') theTextarea: ElementRef<HTMLDivElement>;
+  @ViewChild('theTextarea', {read: ElementRef}) theTextarea: ElementRef<HTMLTextAreaElement>;
   @Input() section: Section;
   current: Section;
   public isOpen = false;
@@ -18,7 +20,10 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
   @Output() saveModification: EventEmitter<ViewEditSectionComponent> = new EventEmitter();
   @Output() saveDeletion: EventEmitter<ViewEditSectionComponent> = new EventEmitter();
 
-  constructor(private ngZone: NgZone) { }
+  constructor(
+    private ngZone: NgZone,
+    private dialog: MatDialog
+  ) { }
 
   ngOnInit() {
   }
@@ -79,6 +84,24 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
         this.minHeight = '0px';
       }
     });
+  }
+
+  insertImage(image: Image) {
+    this.insertText(`![Type your description here!](${image})`);
+  }
+
+  insertText(text: string) {
+    this.current.content += '\n' + text;
+  }
+
+  openImageDialog() {
+    this.dialog.open(ChooseImageDialog)
+      .afterClosed().subscribe(x => {
+        if (x) {
+          this.insertImage(x);
+          this.contentChanged();
+        }
+      });
   }
 
 }

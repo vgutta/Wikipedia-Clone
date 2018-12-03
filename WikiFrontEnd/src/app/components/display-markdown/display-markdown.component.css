@@ -1,6 +1,6 @@
 /deep/ figure {
-  display: inline-block;
   float: right;
+  clear: right;
   border: 1px solid black;
   max-width: 50%;
   border-radius: 5px;
