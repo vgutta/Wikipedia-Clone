@@ -6,6 +6,7 @@ import { CallbackComponent } from './callback/callback.component';
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'landing'},
   {path: 'landing', component: LandingComponent},
+  {path: 'landing/error', component: LandingComponent},
   {path: 'callback', component: CallbackComponent }
 ];
 
