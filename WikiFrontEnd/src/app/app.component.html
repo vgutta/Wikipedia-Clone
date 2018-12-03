@@ -4,6 +4,19 @@
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-blue" routerLink="components/about-page" routerLinkActive="active">Development Team</a>
     </nav>
+    <div class="panel panel-default profile-area">
+        <div class="panel-heading">
+            <h3>Profile</h3>
+        </div>
+        <div class="panel-body">
+            <img src="{{profile?.picture}}" class="avatar" alt="avatar">
+            <div>
+            <label><i class="glyphicon glyphicon-user"></i> Nickname</label>
+            <h3 class="nickname">{{ this.username }}</h3>
+            </div>
+            <pre class="full-profile">{{ profile | json }}</pre>
+        </div>
+    </div>
     <form class="form-inline">
         <button id="qsLoginBtn"
           class="btn btn-primary my-2 my-sm-0"

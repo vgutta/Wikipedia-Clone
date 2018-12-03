@@ -9,14 +9,23 @@ import { Profile } from 'selenium-webdriver/firefox';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  constructor(
-    public auth: AuthService,
-    //public profile: ProfileComponent
-    ) {
-    auth.handleAuthentication();
 
+  profile: any;
+  
+  constructor(public auth: AuthService) {
+    auth.handleAuthentication();
   }
 
   title = 'Wikipedia-Clone';
+
+  ngOnInit() {
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
+    console.log("Profile: ", this.profile);
+  }
 }
