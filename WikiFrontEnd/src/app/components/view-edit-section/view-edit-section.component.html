@@ -22,7 +22,7 @@
       <div id='setHeightWrapper' [style.minHeight]="minHeight">
         <button mat-button (click)="changeDrawer(true)" *ngIf="!isOpen" style="float: right;">EDIT</button>
         <mat-card-title>{{ current.title }}</mat-card-title>
-        <markdown [data]="current.content"></markdown>
+        <app-display-markdown [data]="current.content"></app-display-markdown>
       </div>
     </mat-drawer-container>
   </mat-card-content>

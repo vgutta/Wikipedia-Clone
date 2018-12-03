@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -20,6 +20,8 @@ import { RouterModule, Routes } from '@angular/router';
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
 import { TrendingPipe } from './components/landing/trending.pipe';
+import { MARKDOWN_SETTINGS } from './markdown.settings';
+import { DisplayMarkdownComponent } from './components/display-markdown/display-markdown.component';
 
 //Declares Routes for components
 const appRoutes: Routes = [
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     ViewEditPageComponent,
     ViewEditSectionComponent,
     AboutPageComponent,
-    TrendingPipe
+    TrendingPipe,
+    DisplayMarkdownComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -51,7 +54,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatButtonModule,
     BrowserAnimationsModule,
-    MarkdownModule.forRoot(),
+    MarkdownModule.forRoot({markedOptions: {provide: MarkedOptions, useValue: MARKDOWN_SETTINGS}}),
     RouterModule.forRoot(
       appRoutes,
       {enableTracing: true} // debugging purposes only
