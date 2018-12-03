@@ -17,7 +17,7 @@ renderer.image = (href, title, text) => {
   if (!outsideRegex.test(href)) {
     url = `http://localhost:3542/api/images/${href}`;
   }
-  return `<img src='${url}' alt='${text}' title='${title || ''}' />`;
+  return `<figure><img src='${url}' title='${title || ''}' /><figcaption>${text}</figcaption></figure>`;
 };
 
 export const MARKDOWN_SETTINGS: MarkedOptions = {
