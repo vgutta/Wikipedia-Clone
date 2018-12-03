@@ -14,6 +14,7 @@ export class AppComponent {
   
   constructor(public auth: AuthService) {
     auth.handleAuthentication();
+    console.log("Profile: ", this.profile);
   }
 
   title = 'Wikipedia-Clone';
@@ -27,5 +28,9 @@ export class AppComponent {
       });
     }
     console.log("Profile: ", this.profile);
+  }
+
+  clickProfileImage(){
+    console.log("hi");
   }
 }
