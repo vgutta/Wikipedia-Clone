@@ -4,45 +4,26 @@
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-blue" routerLink="components/about-page" routerLinkActive="active">Development Team</a>
     </nav>
-    <div class="panel panel-default profile-area">
-        <div class="panel-body">
-                <img src="{{profile.picture}}" class="avatar" alt="avatar" >
-                <ul class="dropdown-content">
-                    <li>
-                        <a>Signed in as <strong>{{profile.nickname}}</strong></a>
-                    </li>
-                    <hr />
-                    <li>
-                        <a  
-                            href="#"
-                            *ngIf="auth.isAuthenticated()"
-                            (click)="auth.logout()" type="button">
-                            Log Out 
-                        </a> 
-                    </li>
-
-                    
-                <!--<label><i class="glyphicon glyphicon-user"></i> Nickname</label>-->
-                <!--<h3 class="nickname">{{ profile.given_name }}</h3>-->
-                </ul>
-                <!--<pre class="full-profile">{{ profile | json }}</pre>-->
+    <div *ngIf="auth.isAuthenticated()" class="panel-body">
+        <img src="{{profile.picture}}" class="avatar" alt="avatar" >
+        <div class="dropdown-content">
+                <a class="dropdown-item" href="#">Signed in as <strong>{{profile.nickname}}</strong></a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a id="signout" class="dropdown-item" (click)="auth.logout()">Sign Out</a>
         </div>
+            
+        <!--<pre class="full-profile">{{ profile | json }}</pre>-->
     </div>
-    <form class="form-inline">
+    <form *ngIf="!auth.isAuthenticated()" class="form-inline">
         <button id="qsLoginBtn"
           class="btn btn-primary my-2 my-sm-0"
           *ngIf="!auth.isAuthenticated()"
           (click)="auth.login()" type="button">
             Log In
         </button>
-        <a class="p-2 text-blue" *ngIf="auth.isAuthenticated()">  </a>
-        
-        <button id="qsLogoutBtn"
-          class="btn btn-primary my-2 my-sm-0"
-          *ngIf="auth.isAuthenticated()"
-          (click)="auth.logout()" type="button">
-            Log Out
-        </button>
+        <a class="p-2 text-blue" *ngIf="auth.isAuthenticated()">  </a>   
     </form>
 </div>
 <router-outlet></router-outlet>

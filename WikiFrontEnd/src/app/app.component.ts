@@ -29,6 +29,10 @@ export class AppComponent {
     }
     console.log("Profile: ", this.profile);
   }
+
+  signOutTest(){
+    console.log("SHould log out");
+  }
   /*
   clickProfileImage(){
     console.log("hi");
