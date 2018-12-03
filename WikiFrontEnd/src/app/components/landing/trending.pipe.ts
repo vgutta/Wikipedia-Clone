@@ -8,11 +8,9 @@ import { Page } from '../../models/ud-pages';
     let pagevisits = Object.assign([], values);
 
     pagevisits.sort((a, b) => {
-      //console.log(a);
       return b.pagevisits - a.pagevisits;  
 
     });
-    console.log(pagevisits);
     return pagevisits;
 
    
