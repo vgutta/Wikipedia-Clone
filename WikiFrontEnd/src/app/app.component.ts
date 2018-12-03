@@ -29,8 +29,8 @@ export class AppComponent {
     }
     console.log("Profile: ", this.profile);
   }
-
+  /*
   clickProfileImage(){
     console.log("hi");
-  }
+  }*/
 }
