@@ -8,6 +8,7 @@
       
       <button class="btn btn-lg btn-primary"><div class="d-flex justify-content-center"><i class="fas fa-search "></i></div></button>
     </form>
+    <!--
     <table class="table table-striped table-condensed">
       <thead>
         <th>Title</th>
@@ -20,6 +21,7 @@
       <tbody>
       </tbody>  
     </table>
+    -->
     <h3 class="text-center">Trending</h3>
     <div class="row d-flex justify-content-center">
         <div class="span5">
@@ -29,9 +31,9 @@
               <th>Content</th>
             </thead>
             <tbody> 
-              <tr *ngFor="let entry of (page$ | async)?.sections ">
-                <td>{{entry.title}}</td>
-                <td>{{entry.content}}</td>            
+              <tr *ngFor="let entry of page$ | async | trending; let i=index">
+                <td *ngIf="i<10">{{entry.name}}</td>  
+                <td *ngIf="i<10">{{entry.pagevisits}}</td> <!--this will be changed to summary of article-->        
               </tr>
             </tbody> 
             <tbody>
