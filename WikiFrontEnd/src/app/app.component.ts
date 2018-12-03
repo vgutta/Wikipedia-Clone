@@ -14,10 +14,9 @@ export class AppComponent {
   
   constructor(public auth: AuthService) {
     auth.handleAuthentication();
-    console.log("Profile: ", this.profile);
   }
 
-  title = 'Wikipedia-Clone';
+  title = 'Wikipedia Clone';
 
   ngOnInit() {
     if (this.auth.userProfile) {
@@ -27,14 +26,5 @@ export class AppComponent {
         this.profile = profile;
       });
     }
-    console.log("Profile: ", this.profile);
   }
-
-  signOutTest(){
-    console.log("SHould log out");
-  }
-  /*
-  clickProfileImage(){
-    console.log("hi");
-  }*/
 }
