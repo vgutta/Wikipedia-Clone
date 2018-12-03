@@ -16,6 +16,7 @@ import { CallbackComponent } from './callback/callback.component';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
+import { ProfileComponent } from './components/profile/profile.component';
 
 //Declares Routes for components
 const appRoutes: Routes = [
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     LandingComponent,
     FilterPipe,
     AboutPageComponent,
-    CallbackComponent
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     ReactiveFormsModule,
