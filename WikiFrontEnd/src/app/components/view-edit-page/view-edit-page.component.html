@@ -5,8 +5,13 @@
 
   <app-view-edit-section *ngFor="let section of (page | async).sections; let i = index"
     [section]="section"
-    (saveModification)="sectionChanged(i, $event)">
+    (saveModification)="sectionChanged(i, $event)"
+    (saveDeletion)="deleteSection(i)">
   </app-view-edit-section>
+
+  <div class='centerChild'>
+    <button mat-fab color="accent" (click)="addSection()">+</button>
+  </div>
 
 
 </ng-template>

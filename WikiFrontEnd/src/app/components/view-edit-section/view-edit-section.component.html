@@ -5,7 +5,8 @@
         <div #theDrawer>
           <form>
             <button mat-button (click)="cancel()">Cancel</button>
-            <button mat-button (click)="save()" [disabled]="!modified">Save</button>
+            <button mat-button (click)="save()" [disabled]="!saveable">Save</button>
+            <button mat-raised-button color="warn" (click)="delete()" style='float: right'>Delete</button>
             <mat-form-field style="width: 100%">
               <input matInput name="section-title" type='text' placeholder="Section Title" [(ngModel)]="current.title" (ngModelChange)="contentChanged()" />
             </mat-form-field>
@@ -13,7 +14,7 @@
               <textarea matInput name="section-content" placeholder="Section Content" [(ngModel)]="current.content" cdkTextareaAutosize cdkAutosizeMinRows="5" (ngModelChange)="contentChanged()"></textarea>
             </mat-form-field>
             <button mat-button (click)="cancel()">Cancel</button>
-            <button mat-button (click)="save()" [disabled]="!modified">Save</button>
+            <button mat-button (click)="save()" [disabled]="!saveable">Save</button>
           </form>
         </div>
       </mat-drawer>
@@ -21,7 +22,7 @@
       <div id='setHeightWrapper' [style.minHeight]="minHeight">
         <button mat-button (click)="changeDrawer(true)" *ngIf="!isOpen" style="float: right;">EDIT</button>
         <mat-card-title>{{ current.title }}</mat-card-title>
-        <markdown [data]="current.content"></markdown>
+        <app-display-markdown [data]="current.content"></app-display-markdown>
       </div>
     </mat-drawer-container>
   </mat-card-content>
