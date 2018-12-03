@@ -32,7 +32,7 @@
             </thead>
             <tbody> 
               <tr *ngFor="let entry of page$ | async | trending; let i=index">
-                <td *ngIf="i<10">{{entry.name}}</td>  
+                <td *ngIf="i<10"><a routerLink="/wiki/{{entry.name}}">{{entry.name}}</a></td>  
                 <td *ngIf="i<10">{{entry.pagevisits}}</td> <!--this will be changed to summary of article-->        
               </tr>
             </tbody> 
