@@ -17,4 +17,9 @@ export class ChooseImageDialog {
     this.dialogRef.close();
   }
 
+  done(out: string) {
+    console.log(out);
+    this.dialogRef.close(out);
+  }
+
 }

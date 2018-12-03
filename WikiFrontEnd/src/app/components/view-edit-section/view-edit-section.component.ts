@@ -95,7 +95,11 @@ export class ViewEditSectionComponent implements OnInit, OnChanges {
   }
 
   openImageDialog() {
-    this.dialog.open(ChooseImageDialog)
+    this.dialog.open(ChooseImageDialog,
+      {
+        width: '75vw',
+        height: '75vh'
+      })
       .afterClosed().subscribe(x => {
         if (x) {
           this.insertImage(x);

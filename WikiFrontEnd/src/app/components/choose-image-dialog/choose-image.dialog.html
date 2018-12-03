@@ -1,11 +1,15 @@
-<h1 mat-dialog-title>Hi</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput />
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="'abc'" cdkFocusInitial>Ok</button>
-</div>
+<h1 mat-dialog-title>Add an Image</h1>
+<mat-tab-group>
+  <mat-tab label="Choose Existing Image">
+    <app-choose-existing-image
+      (cancel)="onNoClick()"
+      (done)="done($event)"
+    ></app-choose-existing-image>
+  </mat-tab>
+  <mat-tab label="Upload New Image">
+    <app-upload-image
+      (cancel)="onNoClick()"
+      (done)="done($event)"
+    ></app-upload-image>
+  </mat-tab>
+</mat-tab-group>
