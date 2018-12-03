@@ -3,6 +3,19 @@
     max-width: 5vw;
     max-height: 5vh;
     border-radius: 20px;
+    cursor: pointer;
+}
+
+#signout {
+    /*background-color: red;
+    color: black;*/
+    text-align: center;
+}
+
+#signout:hover {
+    background-color: rgb(17, 90, 247);
+    color: white;
+    cursor: pointer;
 }
 
 .panel-body {
@@ -13,7 +26,7 @@
 .dropdown-content {
     display: none;
     position: absolute;
-    top: 60px;
+    top: 5vh;
     right: 0%;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -22,10 +35,10 @@
     list-style: none;
 }
 
-.panel-body:hover .dropdown-content {
-    display: block;
+.dropdown-item {
+    cursor: text
 }
 
-.signout:hover {
-    background-color: rgb(20, 83, 165);
+.panel-body:hover .dropdown-content {
+    display: block;
 }
