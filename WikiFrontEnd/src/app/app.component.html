@@ -1,9 +1,33 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 ox-md-4 mb-3 bg-white
  border-bottom shadow-sm">
+<<<<<<< HEAD
     <a class="my-0 mr-md-auto font-weight-normal text-blue" routerLink="/landing">WikiClone</a>
+=======
+    <a class="my-0 mr-md-auto font-weight-normal text-blue" href="#">{{this.title}}</a>
+>>>>>>> security
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-blue" routerLink="components/about-page" routerLinkActive="active">Development Team</a>
-        <a class="p-2 text-blue" href='#'>Login</a>
     </nav>
+    <div *ngIf="auth.isAuthenticated()" class="panel-body">
+        <img src="{{profile.picture}}" class="avatar" alt="avatar" >
+        <div class="dropdown-content">
+                <a class="dropdown-item" href="#">Signed in as <strong>{{profile.nickname}}</strong></a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown-divider"></div>
+                <a id="signout" class="dropdown-item" (click)="auth.logout()">Sign Out</a>
+        </div>
+            
+        <!--<pre class="full-profile">{{ profile | json }}</pre>-->
+    </div>
+    <form *ngIf="!auth.isAuthenticated()" class="form-inline">
+        <button id="qsLoginBtn"
+          class="btn btn-primary my-2 my-sm-0"
+          *ngIf="!auth.isAuthenticated()"
+          (click)="auth.login()" type="button">
+            Log In
+        </button>
+        <a class="p-2 text-blue" *ngIf="auth.isAuthenticated()">  </a>   
+    </form>
 </div>
 <router-outlet></router-outlet>

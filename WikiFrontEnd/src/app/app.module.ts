@@ -16,16 +16,19 @@ import { RetrievePageResolve } from './guards/retrieve-page-resolver.service';
 import { ViewEditSectionComponent } from './components/view-edit-section/view-edit-section.component';
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthService } from './auth/auth.service';
+import { CallbackComponent } from './callback/callback.component';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
 import { TrendingPipe } from './components/landing/trending.pipe';
 import { MARKDOWN_SETTINGS } from './markdown.settings';
 import { DisplayMarkdownComponent } from './components/display-markdown/display-markdown.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 //Declares Routes for components
 const appRoutes: Routes = [
-  { path: 'components/about-page', component: AboutPageComponent },
+  { path: 'components/about-page', component: AboutPageComponent }
 ];
 
 
@@ -39,7 +42,9 @@ const appRoutes: Routes = [
     ViewEditSectionComponent,
     AboutPageComponent,
     TrendingPipe,
-    DisplayMarkdownComponent
+    DisplayMarkdownComponent,
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -62,8 +67,9 @@ const appRoutes: Routes = [
     AvatarModule
   ],
   providers: [
-    RetrievePageResolve
+    RetrievePageResolve,
+    AuthService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
