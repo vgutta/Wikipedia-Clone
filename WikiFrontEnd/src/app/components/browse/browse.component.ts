@@ -13,6 +13,7 @@ import {FormControl} from '@angular/forms';
 export class BrowseComponent implements OnInit {
   myControl = new FormControl();
   page$: Observable<Page[]>;
+  options: Array<String>;
   constructor(
     private udPageService: UdPagesService,
     private router: Router
@@ -20,6 +21,7 @@ export class BrowseComponent implements OnInit {
 
   ngOnInit() {
     this.page$ = this.udPageService.getAllPages();
+    this.options = ["All", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
   }
 
 }

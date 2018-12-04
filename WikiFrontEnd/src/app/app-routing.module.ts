@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'landing', component: LandingComponent},
   {path: 'wiki/:pageName', component: ViewEditPageComponent, resolve: { page: RetrievePageResolve } },
   {path: 'landing/error', component: LandingComponent},
-  {path: 'callback', component: CallbackComponent }
+  {path: 'callback', component: CallbackComponent },
   {path: 'browse', component: BrowseComponent}
 
 ];

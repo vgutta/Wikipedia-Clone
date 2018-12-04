@@ -26,6 +26,7 @@ import { MARKDOWN_SETTINGS } from './markdown.settings';
 import { DisplayMarkdownComponent } from './components/display-markdown/display-markdown.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { BrowseComponent } from './components/browse/browse.component';
+import { BrowsePipe } from './components/browse/browse.pipe';
 
 //Declares Routes for components
 const appRoutes: Routes = [
@@ -45,8 +46,9 @@ const appRoutes: Routes = [
     TrendingPipe,
     DisplayMarkdownComponent,
     CallbackComponent,
-    ProfileComponent
-    BrowseComponent
+    ProfileComponent,
+    BrowseComponent,
+    BrowsePipe
   ],
   imports: [
     ReactiveFormsModule,
