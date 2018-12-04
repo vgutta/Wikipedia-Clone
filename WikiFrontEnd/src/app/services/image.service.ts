@@ -13,4 +13,12 @@ export class ImageService {
   public getListing(): Observable<Image[]> {
     return this.http.get<Image[]>('http://localhost:3542/api/images');
   }
+
+  public uploadImage(contentType: string, data: ArrayBuffer): Observable<Image> {
+    return this.http.post<Image>('http://localhost:3542/api/images', data, {
+      headers: {
+        contentType: contentType
+      }
+    });
+  }
 }

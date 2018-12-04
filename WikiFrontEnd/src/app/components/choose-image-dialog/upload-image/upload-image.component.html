@@ -3,5 +3,5 @@
 
 <form>
   <button mat-raised-button (click)="cancel.emit()">Cancel</button>
-  <button mat-raised-button (click)="done.emit(fileInput.files)" [disabled]="!fileInfo">Done</button>
+  <button mat-raised-button (click)="submit(fileInput)" [disabled]="!(fileInfo?.type?.indexOf('image') === 0)">Done</button>
 </form>
