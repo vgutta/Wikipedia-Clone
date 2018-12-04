@@ -1,0 +1,11 @@
+mat-toggle-button {
+  padding: 10px;
+}
+
+.mat-button-toggle-checked img {
+  opacity: 0.5;
+}
+
+img {
+  width: 100%;
+}
