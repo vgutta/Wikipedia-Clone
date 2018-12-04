@@ -1,4 +1,5 @@
 const { Page } = require('../models/page');
+const summarizer = require('nodejs-text-summarizer');
 
 function isValidPageName(pageName) {
   return (
@@ -37,7 +38,7 @@ function internalServerError(res) {
 }
 
 async function getListing(res) {
-  const pages = await Page.find({}, {name: true, pagevisits: true})
+  const pages = await Page.find({}, {name: true, pagevisits: true, pageSummary: true})
     .catch(internalServerError(res));
 
   return res.json(pages);
@@ -67,12 +68,24 @@ async function putPage(res, pageName, pageData) {
 
   const page = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
+  /*
+  let article;
+  page.sections.forEach(element => {
+    article += element;
+  });
 
+  page.pageSummary = summarizer(article);
+  */
   if (page === null) return res.status(404).send();
   Object.assign(page, pageData);
+  let article;
+  page.sections.forEach(element => {
+    article += element;
+  });
+  
+  page.pageSummary = summarizer(article);
   await page.save()
     .catch(internalServerError(res));
-
   return res.status(204).send();
 }
 
