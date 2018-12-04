@@ -5,8 +5,9 @@ const schema = new mongoose.Schema({
   pagevisits: Number,
   sections: [{
     title: String,
-    content: String,
-  }]
+    content: String
+  }],
+  summary: String
 });
 
 exports.Page = mongoose.model('Page', schema);
