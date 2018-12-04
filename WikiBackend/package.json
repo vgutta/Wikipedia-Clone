@@ -13,6 +13,7 @@
     "express": "^4.16.4",
     "mongoose": "^5.3.13",
     "node-summary": "^1.2.0",
-    "nodejs-text-summarizer": "^2.0.3"
+    "nodejs-text-summarizer": "^2.0.3",
+    "remove-markdown": "^0.3.0"
   }
 }

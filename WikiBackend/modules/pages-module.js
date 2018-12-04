@@ -1,5 +1,6 @@
 const { Page } = require('../models/page');
 const summarizer = require('nodejs-text-summarizer');
+const removeMd = require('remove-markdown')
 
 function isValidPageName(pageName) {
   return (
@@ -83,7 +84,10 @@ async function putPage(res, pageName, pageData) {
     article += element;
   });
   
-  page.pageSummary = summarizer(article);
+  //Removes Markdown
+  strippedArticle = removeMd(article)
+  //Summarizes Article
+  page.pageSummary = summarizer(strippedArticle);
   await page.save()
     .catch(internalServerError(res));
   return res.status(204).send();
