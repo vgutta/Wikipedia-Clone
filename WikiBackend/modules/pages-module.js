@@ -63,6 +63,7 @@ async function getPage(res, pageName) {
   return res.json(page);
 }
 
+//Summary will happen here
 async function putPage(res, pageName, pageData) {
   if (!isValidPageName(pageName) || !isValidPageData(pageData) || pageData.name !== pageName) return res.status(400).send();
 
@@ -74,9 +75,15 @@ async function putPage(res, pageName, pageData) {
   await page.save()
     .catch(internalServerError(res));
 
+  //Iterates through sections
+  page.sections.forEach(function(content){
+    page.summary += summarizer(content);
+  });
+
   return res.status(204).send();
 }
 
+//Summary will happen here
 async function postPage(res, pageData) {
   if (!isValidPageData(pageData)) return res.status(400).send();
 
@@ -88,6 +95,11 @@ async function postPage(res, pageData) {
   Object.assign(newPage, pageData);
   const err = await newPage.save()
     .catch(internalServerError(res));
+
+  //Iterates through sections
+  page.sections.forEach(function(content){
+    page.summary += summarizer(content);
+  });
 
   res.status(201).send();
 }
