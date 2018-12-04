@@ -37,16 +37,25 @@ function internalServerError(res) {
 }
 
 async function getListing(res) {
-  const pages = await Page.find({}, {name: true})
+  const pages = await Page.find({}, {name: true, pagevisits: true})
     .catch(internalServerError(res));
 
-  return res.json(pages.map(x => x.name));
+  return res.json(pages);
 }
 
 async function getPage(res, pageName) {
   if (!isValidPageName(pageName)) return res.status(400).send();
 
   const page = await Page.findOne({ name: pageName })
+    .catch(internalServerError(res));
+
+  if(!page.pagevisits){
+    page.pagevisits = 1;
+  } else {
+    page.pagevisits++;
+  }
+  
+  await page.save()
     .catch(internalServerError(res));
 
   if (page === null) return res.status(404).send();
