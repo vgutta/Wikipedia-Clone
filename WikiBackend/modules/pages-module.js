@@ -51,6 +51,8 @@ async function getPage(res, pageName) {
   const page = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
 
+  if (page === null) return res.status(404).send();
+
   if(!page.pagevisits){
     page.pagevisits = 1;
   } else {
@@ -60,7 +62,6 @@ async function getPage(res, pageName) {
   await page.save()
     .catch(internalServerError(res));
 
-  if (page === null) return res.status(404).send();
   return res.json(page);
 }
 
@@ -79,13 +80,13 @@ async function putPage(res, pageName, pageData) {
   */
   if (page === null) return res.status(404).send();
   Object.assign(page, pageData);
-  let article;
+  let article = '';
   page.sections.forEach(element => {
-    article += element;
+    article += element.content + '\n';
   });
   
   //Removes Markdown
-  strippedArticle = removeMd(article)
+  strippedArticle = removeMd(article, { useImgAltText: false });
   //Summarizes Article
   page.pageSummary = summarizer(strippedArticle);
   await page.save()
