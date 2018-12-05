@@ -4,13 +4,19 @@
   </div>
     <h1 class="text-center ">Wikipedia Clone</h1>
   <img src="../assets/images/enwiki.png" class="mx-auto d-block" alt="">
-    <form class="d-flex justify-content-center" >
-          <div class="search-bar">
-              <input name = "search" [(ngModel)]="search" type="text" id="search" class="form-control " [matAutocomplete]="auto" matInput>
-            </div>
-      
-      <button class="btn btn-lg btn-primary"><div class="d-flex justify-content-center"><i class="fas fa-search "></i></div></button>
-    </form>
+  <form class="d-flex justify-content-center">
+    <mat-form-field class="example-full-width" [style.fontSize.px]=12 appearance="outline"  >
+      <mat-label>Search</mat-label>
+      <input name = "search" [(ngModel)]="search" type="text" aria-label="Number" matInput [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option [style.fontSize.px]=12 *ngFor="let option of page$ | async | filter: search" [value]="option.name">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field> 
+    <a routerLink="/wiki/{{search}}" class="search-button btn btn-lg btn-primary"><div class="d-flex justify-content-center"><i class="fas fa-search "></i></div></a>
+   
+  </form>
     <!--
     <table class="table table-striped table-condensed">
       <thead>
