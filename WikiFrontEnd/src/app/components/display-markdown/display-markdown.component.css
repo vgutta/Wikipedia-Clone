@@ -1,0 +1,18 @@
+/deep/ figure {
+  float: right;
+  clear: right;
+  border: 1px solid black;
+  max-width: 50%;
+  border-radius: 5px;
+}
+
+/deep/ figure img {
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  padding: 5px;
+}
+
+/deep/ figure figcaption {
+  text-align: center;
+  margin: 5px;
+}

@@ -1,0 +1,7 @@
+<p>Upload an image</p>
+<input #fileInput type='file' (change)="changed($event)" />
+
+<form>
+  <button mat-raised-button (click)="cancel.emit()">Cancel</button>
+  <button mat-raised-button (click)="submit(fileInput)" [disabled]="!(fileInfo?.type?.indexOf('image') === 0)">Done</button>
+</form>

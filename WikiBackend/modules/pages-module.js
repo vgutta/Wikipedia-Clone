@@ -1,4 +1,6 @@
 const { Page } = require('../models/page');
+const summarizer = require('nodejs-text-summarizer');
+const removeMd = require('remove-markdown')
 
 function isValidPageName(pageName) {
   return (
@@ -37,7 +39,7 @@ function internalServerError(res) {
 }
 
 async function getListing(res) {
-  const pages = await Page.find({}, {name: true, pagevisits: true})
+  const pages = await Page.find({}, {name: true, pagevisits: true, pageSummary: true})
     .catch(internalServerError(res));
 
   return res.json(pages);
@@ -49,6 +51,8 @@ async function getPage(res, pageName) {
   const page = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
 
+  if (page === null) return res.status(404).send();
+
   if(!page.pagevisits){
     page.pagevisits = 1;
   } else {
@@ -58,7 +62,6 @@ async function getPage(res, pageName) {
   await page.save()
     .catch(internalServerError(res));
 
-  if (page === null) return res.status(404).send();
   return res.json(page);
 }
 
@@ -67,12 +70,27 @@ async function putPage(res, pageName, pageData) {
 
   const page = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
+  /*
+  let article;
+  page.sections.forEach(element => {
+    article += element;
+  });
 
+  page.pageSummary = summarizer(article);
+  */
   if (page === null) return res.status(404).send();
   Object.assign(page, pageData);
+  let article = '';
+  page.sections.forEach(element => {
+    article += element.content + '\n';
+  });
+  
+  //Removes Markdown
+  strippedArticle = removeMd(article, { useImgAltText: false });
+  //Summarizes Article
+  page.pageSummary = summarizer(strippedArticle);
   await page.save()
     .catch(internalServerError(res));
-
   return res.status(204).send();
 }
 
