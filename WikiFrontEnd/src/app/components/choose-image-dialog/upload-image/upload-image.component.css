@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  margin: 20px;
+}
+
+input {
+  width: 100%;
+}
+
+form {
+  margin: 20px;
+}

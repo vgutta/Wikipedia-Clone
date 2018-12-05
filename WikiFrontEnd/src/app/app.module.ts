@@ -9,7 +9,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { FilterPipe} from './components/landing/filter.pipe';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule, MatInputModule, MatSidenavModule, MatButtonModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSidenavModule, MatButtonModule, MatDialogModule, MatTabsModule, MatButtonToggleModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ViewEditPageComponent } from './components/view-edit-page/view-edit-page.component';
 import { RetrievePageResolve } from './guards/retrieve-page-resolver.service';
@@ -24,6 +24,10 @@ import { AvatarModule } from 'ngx-avatar';
 import { TrendingPipe } from './components/landing/trending.pipe';
 import { MARKDOWN_SETTINGS } from './markdown.settings';
 import { DisplayMarkdownComponent } from './components/display-markdown/display-markdown.component';
+import { ChooseImageDialog } from './components/choose-image-dialog/choose-image.dialog';
+import { ChooseExistingImageComponent } from './components/choose-image-dialog/choose-existing-image/choose-existing-image.component';
+import { UploadImageComponent } from './components/choose-image-dialog/upload-image/upload-image.component';
+import { SelectableImageComponent } from './components/choose-image-dialog/selectable-image/selectable-image.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 //Declares Routes for components
@@ -43,6 +47,10 @@ const appRoutes: Routes = [
     AboutPageComponent,
     TrendingPipe,
     DisplayMarkdownComponent,
+    ChooseImageDialog,
+    ChooseExistingImageComponent,
+    UploadImageComponent,
+    SelectableImageComponent,
     CallbackComponent,
     ProfileComponent
   ],
@@ -58,6 +66,9 @@ const appRoutes: Routes = [
     MatCardModule,
     MatSidenavModule,
     MatButtonModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatButtonToggleModule,
     BrowserAnimationsModule,
     MarkdownModule.forRoot({markedOptions: {provide: MarkedOptions, useValue: MARKDOWN_SETTINGS}}),
     RouterModule.forRoot(
@@ -70,6 +81,9 @@ const appRoutes: Routes = [
     RetrievePageResolve,
     AuthService
   ],
-  bootstrap: [AppComponent],
+  entryComponents: [
+    ChooseImageDialog
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
