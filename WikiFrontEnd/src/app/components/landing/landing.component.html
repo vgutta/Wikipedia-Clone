@@ -1,5 +1,8 @@
 <div class="container">
-  <h1 class="text-center ">Wikipedia Clone</h1>
+  <div *ngIf="this.router.url === '/landing/error'">
+    <div data-ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger text-center" ><strong>Error:</strong> Please sign in with a University of Delaware affiliated Google account.</div>
+  </div>
+    <h1 class="text-center ">Wikipedia Clone</h1>
   <img src="../assets/images/enwiki.png" class="mx-auto d-block" alt="">
     <form class="d-flex justify-content-center" >
           <div class="search-bar">
@@ -33,7 +36,7 @@
             <tbody> 
               <tr *ngFor="let entry of page$ | async | trending; let i=index">
                 <td *ngIf="i<10"><a routerLink="/wiki/{{entry.name}}">{{entry.name}}</a></td>  
-                <td *ngIf="i<10">{{entry.pagevisits}}</td> <!--this will be changed to summary of article-->        
+                <td *ngIf="i<10">{{entry.pageSummary}}</td> <!--this will be changed to summary of article-->        
               </tr>
             </tbody> 
             <tbody>

@@ -16,6 +16,8 @@ import { RetrievePageResolve } from './guards/retrieve-page-resolver.service';
 import { ViewEditSectionComponent } from './components/view-edit-section/view-edit-section.component';
 import { AboutPageComponent } from './components/about-page/about-page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthService } from './auth/auth.service';
+import { CallbackComponent } from './callback/callback.component';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
@@ -26,10 +28,11 @@ import { ChooseImageDialog } from './components/choose-image-dialog/choose-image
 import { ChooseExistingImageComponent } from './components/choose-image-dialog/choose-existing-image/choose-existing-image.component';
 import { UploadImageComponent } from './components/choose-image-dialog/upload-image/upload-image.component';
 import { SelectableImageComponent } from './components/choose-image-dialog/selectable-image/selectable-image.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 //Declares Routes for components
 const appRoutes: Routes = [
-  { path: 'components/about-page', component: AboutPageComponent },
+  { path: 'components/about-page', component: AboutPageComponent }
 ];
 
 
@@ -47,7 +50,9 @@ const appRoutes: Routes = [
     ChooseImageDialog,
     ChooseExistingImageComponent,
     UploadImageComponent,
-    SelectableImageComponent
+    SelectableImageComponent,
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -73,7 +78,8 @@ const appRoutes: Routes = [
     AvatarModule
   ],
   providers: [
-    RetrievePageResolve
+    RetrievePageResolve,
+    AuthService
   ],
   entryComponents: [
     ChooseImageDialog

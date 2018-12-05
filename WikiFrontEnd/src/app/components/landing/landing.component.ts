@@ -4,6 +4,7 @@ import { Page } from '../../models/ud-pages';
 import { UdPagesService } from '../../services/ud-pages.service';
 import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -15,7 +16,7 @@ export class LandingComponent implements OnInit {
   page$: Observable<Page[]>;
   constructor(
     private udPageService: UdPagesService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
