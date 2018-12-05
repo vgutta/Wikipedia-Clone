@@ -18,6 +18,7 @@ import { AboutPageComponent } from './components/about-page/about-page.component
 import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatButtonToggleModule,
     BrowserAnimationsModule,
+    MatRadioModule,
     MarkdownModule.forRoot({markedOptions: {provide: MarkedOptions, useValue: MARKDOWN_SETTINGS}}),
     RouterModule.forRoot(
       appRoutes,

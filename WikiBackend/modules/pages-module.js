@@ -103,6 +103,7 @@ async function postPage(res, pageData) {
   if (preexisting !== null) return res.status(409).send();
   const newPage = new Page();
   Object.assign(newPage, pageData);
+  newPage.createdDate = new Date();
   const err = await newPage.save()
     .catch(internalServerError(res));
 
