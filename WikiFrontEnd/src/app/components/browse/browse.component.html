@@ -20,15 +20,13 @@
         <thead>
           <th>Title</th>
           <th>Summary</th>
-          <th>Views</th>
           <th>Date</th>
         </thead>
         <tbody>
           <tr *ngFor="let entry of page$ | async | browse:option:order">
             <td><a routerLink="/wiki/{{entry.name}}">{{entry.name}}</a></td>
             <td>{{entry.pageSummary}}</td>
-            <td>{{entry.pagevisits}}</td>
-            <td>{{entry.createdDate | date: 'MM-dd-yy'}}</td>
+            <td nowrap="nowrap">{{entry.createdDate | date: 'MM-dd-yy'}}</td>
           </tr>
         </tbody>
       </table>
