@@ -18,6 +18,7 @@ import { AboutPageComponent } from './components/about-page/about-page.component
 import { RouterModule, Routes } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 //Imports Avatar Module
 import { AvatarModule } from 'ngx-avatar';
@@ -29,6 +30,8 @@ import { ChooseExistingImageComponent } from './components/choose-image-dialog/c
 import { UploadImageComponent } from './components/choose-image-dialog/upload-image/upload-image.component';
 import { SelectableImageComponent } from './components/choose-image-dialog/selectable-image/selectable-image.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { BrowseComponent } from './components/browse/browse.component';
+import { BrowsePipe } from './components/browse/browse.pipe';
 
 //Declares Routes for components
 const appRoutes: Routes = [
@@ -52,7 +55,9 @@ const appRoutes: Routes = [
     UploadImageComponent,
     SelectableImageComponent,
     CallbackComponent,
-    ProfileComponent
+    ProfileComponent,
+    BrowseComponent,
+    BrowsePipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -70,6 +75,7 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatButtonToggleModule,
     BrowserAnimationsModule,
+    MatRadioModule,
     MarkdownModule.forRoot({markedOptions: {provide: MarkedOptions, useValue: MARKDOWN_SETTINGS}}),
     RouterModule.forRoot(
       appRoutes,

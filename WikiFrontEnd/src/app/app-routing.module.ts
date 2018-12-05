@@ -6,13 +6,16 @@ import { RetrievePageResolve } from './guards/retrieve-page-resolver.service';
 import { CallbackComponent } from './callback/callback.component';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { AuthGuard } from './auth.guard';
+import { BrowseComponent} from './components/browse/browse.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'landing',},
   {path: 'landing', component: LandingComponent},
   {path: 'wiki/:pageName', component: ViewEditPageComponent, resolve: { page: RetrievePageResolve }, canActivate: [AuthGuard] },
   {path: 'landing/error', component: LandingComponent},
-  {path: 'callback', component: CallbackComponent }
+  {path: 'callback', component: CallbackComponent },
+  {path: 'browse', component: BrowseComponent}
+
 ];
 
 @NgModule({

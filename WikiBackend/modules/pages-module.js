@@ -39,7 +39,7 @@ function internalServerError(res) {
 }
 
 async function getListing(res) {
-  const pages = await Page.find({}, {name: true, pagevisits: true, pageSummary: true})
+  const pages = await Page.find({}, {name: true, pagevisits: true, pageSummary: true, createdDate: true})
     .catch(internalServerError(res));
 
   return res.json(pages);
@@ -103,6 +103,7 @@ async function postPage(res, pageData) {
   if (preexisting !== null) return res.status(409).send();
   const newPage = new Page();
   Object.assign(newPage, pageData);
+  newPage.createdDate = new Date();
   const err = await newPage.save()
     .catch(internalServerError(res));
 
