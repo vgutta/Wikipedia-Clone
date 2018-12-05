@@ -19,7 +19,6 @@ export class DisplayMarkdownComponent implements OnChanges {
 
   private makeRouterLinks() {
     window.setTimeout(() => {
-      console.log(this.theDiv);
       const links = this.theDiv.element.nativeElement.getElementsByClassName('convert-link') as HTMLCollectionOf<HTMLAnchorElement>;
       const router = this.router;
       for (const link of Array.from(links)) {
@@ -28,7 +27,7 @@ export class DisplayMarkdownComponent implements OnChanges {
           e.preventDefault();
         });
       }
-    }, 0);
+    });
   }
 
 }
