@@ -1,1 +1,8 @@
-<app-selectable-image *ngFor="let img of images | async" [imageId]="img"></app-selectable-image>
+<div class='top-buttons'>
+  <button mat-raised-button (click)="cancel.emit()">Cancel</button>
+  <button mat-raised-button (click)="done.emit(selectedImage.imageId)" [disabled]="!selectedImage">Insert Image</button>
+</div>
+
+<div class='the-flexbox'>
+  <app-selectable-image #thisSelector *ngFor="let img of images | async" [imageId]="img" (selectedEvent)="selectedImage = $event" [selected]="img === selectedImage?.imageId"></app-selectable-image>
+</div>

@@ -1,4 +1,4 @@
-:host {
+.the-flexbox {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -7,4 +7,12 @@
 
 app-selectable-image {
   max-width: 300px;
+}
+
+.top-buttons {
+  position: fixed;
+  height: 75px;
+  z-index: 1;
+  bottom: 12.5vh;
+  z-index: 1;
 }

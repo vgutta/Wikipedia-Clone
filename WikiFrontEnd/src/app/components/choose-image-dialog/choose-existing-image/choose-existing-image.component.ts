@@ -12,6 +12,7 @@ export class ChooseExistingImageComponent implements OnInit {
   @Output() cancel = new EventEmitter<void>();
   @Output() done = new EventEmitter<string>();
   images: Observable<Image[]>;
+  public selectedImage: ChooseExistingImageComponent;
 
   constructor(private imageService: ImageService) { }
 
