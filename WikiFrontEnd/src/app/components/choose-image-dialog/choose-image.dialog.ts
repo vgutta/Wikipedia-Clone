@@ -18,7 +18,6 @@ export class ChooseImageDialog {
   }
 
   done(out: string) {
-    console.log(out);
     this.dialogRef.close(out);
   }
 
