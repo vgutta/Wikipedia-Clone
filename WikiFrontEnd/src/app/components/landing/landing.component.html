@@ -9,8 +9,8 @@
       <mat-label>Search</mat-label>
       <input name = "search" [(ngModel)]="search" type="text" aria-label="Number" matInput [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option [style.fontSize.px]=12 *ngFor="let option of page$ | async | filter: search" [value]="option.name">
-          {{option.name}}
+        <mat-option [style.fontSize.px]=12 *ngFor="let option of page$ | async | filter: search; let i = index" [value]="option.name">
+          <a routerLink="/wiki/{{search}}" class="searchresults">{{option.name}}</a>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field> 
