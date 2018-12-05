@@ -39,7 +39,7 @@ function internalServerError(res) {
 }
 
 async function getListing(res) {
-  const pages = await Page.find({}, {name: true, pagevisits: true, pageSummary: true})
+  const pages = await Page.find({}, {name: true, pagevisits: true, pageSummary: true, createdDate: true})
     .catch(internalServerError(res));
 
   return res.json(pages);
