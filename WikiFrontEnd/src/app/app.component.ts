@@ -16,7 +16,7 @@ export class AppComponent {
     auth.handleAuthentication();
   }
 
-  title = 'Wikipedia Clone';
+  title = 'UD Wiki';
 
   ngOnInit() {
     if (this.auth.userProfile) {
