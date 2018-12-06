@@ -1,11 +1,21 @@
 .example-full-width {
-    width: 300px;
+    width: 50%;
     padding-right:5px;
   }
 
 
   .search-button{
     margin-top:3px;
-    height:43px;
+    height:47px;
   }
 
+  .smaller{
+    width:20%;
+    margin:10px;
+  }
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 1000px) {
+  .example-full-width{
+    width: 75%;
+  }
+}
