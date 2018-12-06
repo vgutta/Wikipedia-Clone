@@ -7,10 +7,10 @@
     <form id="changeTitle" *ngIf=isOpen>
         <div class="form-row align-items-center">
             <div class="col-auto">
-              <input matInput type="text" id="submitTitle"class="form-control mb-2" id="inlineFormInput" placeholder="New Title">
+              <input matInput #name type="text" id="submitTitle" class="form-control mb-2" id="inlineFormInput" placeholder="New Title">
             </div>
             <div class="col-auto">
-              <button mat-button type="submit" (click)="submitTitle()" class="btn btn-primary mb-2">Submit</button>
+              <button mat-button type="submit" (click)="submitTitle(name.value)" class="btn btn-primary mb-2">Submit</button>
             </div>
         </div>
     </form>
