@@ -4,7 +4,17 @@ h2 {
 }
 
 .centerChild {
+  padding-bottom: 2vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#editTitle {
+  margin-right: 11vw;
+}
+
+#changeTitle {
+  margin-left: 69.2vw;
+  margin-top: 1.5vh;
 }

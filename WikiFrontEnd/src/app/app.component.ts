@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
-import { ProfileComponent } from './components/profile/profile.component';
-import { Profile } from 'selenium-webdriver/firefox';
+import { UdPagesService } from './services/ud-pages.service';
+import { Observable } from 'rxjs';
+import { Page } from 'src/app/models/ud-pages';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,10 @@ import { Profile } from 'selenium-webdriver/firefox';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  page: Observable<Page>;
   profile: any;
   
-  constructor(public auth: AuthService) {
+  constructor(public router: Router, public auth: AuthService, private pagesService: UdPagesService) {
     auth.handleAuthentication();
   }
 
@@ -26,5 +28,18 @@ export class AppComponent {
         this.profile = profile;
       });
     }
+  }
+
+  createNewPage() {
+    const newData: Page = {
+      name: "New Page",
+      sections: []
+    };
+    this.pagesService.postPage(newData).subscribe(
+      () => {
+        console.log("navigating away");
+        this.router.navigate(['/wiki/New Page']);
+      }
+    );
   }
 }

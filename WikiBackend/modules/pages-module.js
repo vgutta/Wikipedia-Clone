@@ -66,18 +66,12 @@ async function getPage(res, pageName) {
 }
 
 async function putPage(res, pageName, pageData) {
-  if (!isValidPageName(pageName) || !isValidPageData(pageData) || pageData.name !== pageName) return res.status(400).send();
+  console.log("Changing Title, Backend");
+  if (!isValidPageName(pageName) || !isValidPageData(pageData) /*|| pageData.name !== pageName*/) return res.status(400).send();
 
   const page = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
-  /*
-  let article;
-  page.sections.forEach(element => {
-    article += element;
-  });
 
-  page.pageSummary = summarizer(article);
-  */
   if (page === null) return res.status(404).send();
   Object.assign(page, pageData);
   let article = '';
@@ -104,8 +98,10 @@ async function postPage(res, pageData) {
   const newPage = new Page();
   Object.assign(newPage, pageData);
   newPage.createdDate = new Date();
+  //newPage.name = "New Page";
   const err = await newPage.save()
     .catch(internalServerError(res));
+
 
   res.status(201).send();
 }

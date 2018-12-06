@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+//import { Section, Image } from 'src/app/models/ud-pages';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Page } from 'src/app/models/ud-pages';
 import { ViewEditSectionComponent } from '../view-edit-section/view-edit-section.component';
 import { UdPagesService } from '../../services/ud-pages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-edit-page',
@@ -12,10 +14,13 @@ import { UdPagesService } from '../../services/ud-pages.service';
   styleUrls: ['./view-edit-page.component.css']
 })
 export class ViewEditPageComponent implements OnInit {
+  //@Input() section: Section;
+  //current: Section;
   page: Observable<Page>;
   latest: Page;
+  public isOpen = false;
 
-  constructor(private route: ActivatedRoute, private pagesService: UdPagesService) { }
+  constructor(public router: Router, private route: ActivatedRoute, private pagesService: UdPagesService) { }
 
   ngOnInit() {
     this.page = this.route.data.pipe(map((x) => x.page ));
@@ -61,4 +66,26 @@ export class ViewEditPageComponent implements OnInit {
     );
   }
 
+  editTitle() {
+    if(!this.isOpen){
+      this.isOpen = true;
+    } else{
+      this.isOpen = false;
+    }
+  }
+
+  submitTitle(input) {
+    console.log(input);
+    const newData: Page = {
+      name: "Purnell",
+      sections: Array.from(this.latest.sections) // shallow clone
+    };
+    console.log("Starting to submit title");
+    this.pagesService.updatePage(this.latest.name, newData).subscribe(
+      () => {
+        console.log("Name updated, reloading Page");
+        this.router.navigate([`/wiki/${newData.name}`]);
+      }
+    );
+  }
 }

@@ -9,10 +9,10 @@
         <img src="{{profile.picture}}" class="avatar" alt="avatar" >
         <div class="dropdown-content">
                 <a class="dropdown-item" href="#">Signed in as <strong>{{profile.nickname}}</strong></a>
-                <!-- <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a> -->
                 <div class="dropdown-divider"></div>
-                <a id="signout" class="dropdown-item" (click)="auth.logout()">Sign Out</a>
+                <a id="signout" class="dropdown-item" (click)="createNewPage()">Create New Page</a>
+                <!--<a class="dropdown-item" href="#">Something else here</a>-->
+                <a id="signout" class="dropdown-item" (click)="auth.logout()">Sign out</a>
         </div>
             
         <!--<pre class="full-profile">{{ profile | json }}</pre>-->
