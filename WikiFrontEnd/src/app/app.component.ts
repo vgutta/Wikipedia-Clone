@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { UdPagesService } from './services/ud-pages.service';
+import { Observable } from 'rxjs';
+import { Page } from 'src/app/models/ud-pages';
 import { ProfileComponent } from './components/profile/profile.component';
 import { Profile } from 'selenium-webdriver/firefox';
 
@@ -10,7 +12,7 @@ import { Profile } from 'selenium-webdriver/firefox';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  page: Observable<Page>;
   profile: any;
   
   constructor(public auth: AuthService, private pagesService: UdPagesService) {
@@ -30,9 +32,11 @@ export class AppComponent {
   }
 
   createNewPage() {
-    
-    this.pagesService.postPage("New Page")
-      .subscribe();
-    //console.log("Create New Page");
+    const newData: Page = {
+      name: "New Page",
+      sections: []
+    };
+    this.pagesService.postPage(newData);
+    console.log("Sent to Mongo");
   }
 }

@@ -27,8 +27,8 @@ export class UdPagesService {
     return this.http.put<Page>(`http://localhost:3542/api/pages/${pageName}`, pageData, { headers: {contentType: 'text/json'}});
   }
 
-  postPage(pageName: string) {
-    return this.http.post<Page>(`http://localhost:3542/api/pages`, { headers: {contentType: 'text/json'}});
+  postPage(pageData: Page) {
+    return this.http.post<Page>(`http://localhost:3542/api/pages`, pageData, { headers: {contentType: 'text/json'}});
   }
 
 }

@@ -58,6 +58,8 @@ async function getPage(res, pageName) {
   } else {
     page.pagevisits++;
   }
+
+  console.log("Get pages");
   
   await page.save()
     .catch(internalServerError(res));
@@ -88,6 +90,8 @@ async function putPage(res, pageName, pageData) {
 }
 
 async function postPage(res, pageData) {
+  console.log("Entered post");
+
   if (!isValidPageData(pageData)) return res.status(400).send();
 
   const preexisting = await Page.findOne({ name: pageData.name })
@@ -96,9 +100,10 @@ async function postPage(res, pageData) {
   if (preexisting !== null) return res.status(409).send();
   const newPage = new Page();
   Object.assign(newPage, pageData);
-  newPage.name = "New Page";
+  //newPage.name = "New Page";
   const err = await newPage.save()
     .catch(internalServerError(res));
+
 
   res.status(201).send();
 }
