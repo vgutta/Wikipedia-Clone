@@ -77,9 +77,10 @@ export class ViewEditPageComponent implements OnInit {
   submitTitle(input) {
     console.log(input);
     const newData: Page = {
-      name: "Purnell",
+      name: input,
       sections: Array.from(this.latest.sections) // shallow clone
     };
+    
     console.log("Starting to submit title");
     this.pagesService.updatePage(this.latest.name, newData).subscribe(
       () => {
