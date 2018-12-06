@@ -58,8 +58,6 @@ async function getPage(res, pageName) {
   } else {
     page.pagevisits++;
   }
-
-  console.log("Get pages");
   
   await page.save()
     .catch(internalServerError(res));

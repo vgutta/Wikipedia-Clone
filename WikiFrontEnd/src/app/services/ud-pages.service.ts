@@ -28,7 +28,9 @@ export class UdPagesService {
   }
 
   postPage(pageData: Page) {
+    console.log("Sending to backend");
     return this.http.post<Page>(`http://localhost:3542/api/pages`, pageData, { headers: {contentType: 'text/json'}});
+    //return this.http.delete<Page>(`http://localhost:3542/api/pages/${pageData.name}`);
   }
 
 }

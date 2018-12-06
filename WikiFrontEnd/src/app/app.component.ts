@@ -3,6 +3,7 @@ import { AuthService } from './auth/auth.service';
 import { UdPagesService } from './services/ud-pages.service';
 import { Observable } from 'rxjs';
 import { Page } from 'src/app/models/ud-pages';
+import { Router } from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
 import { Profile } from 'selenium-webdriver/firefox';
 
@@ -15,7 +16,7 @@ export class AppComponent {
   page: Observable<Page>;
   profile: any;
   
-  constructor(public auth: AuthService, private pagesService: UdPagesService) {
+  constructor(public router: Router, public auth: AuthService, private pagesService: UdPagesService) {
     auth.handleAuthentication();
   }
 
@@ -36,7 +37,11 @@ export class AppComponent {
       name: "New Page",
       sections: []
     };
-    this.pagesService.postPage(newData);
-    console.log("Sent to Mongo");
+    this.pagesService.postPage(newData).subscribe(
+      () => {
+        console.log("navigating away");
+        this.router.navigate(['/wiki/New Page']);
+      }
+    );
   }
 }
