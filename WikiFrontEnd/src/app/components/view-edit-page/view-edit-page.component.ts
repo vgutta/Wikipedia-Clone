@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+//import { Section, Image } from 'src/app/models/ud-pages';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Page } from 'src/app/models/ud-pages';
@@ -12,8 +13,11 @@ import { UdPagesService } from '../../services/ud-pages.service';
   styleUrls: ['./view-edit-page.component.css']
 })
 export class ViewEditPageComponent implements OnInit {
+  //@Input() section: Section;
+  //current: Section;
   page: Observable<Page>;
   latest: Page;
+  public isOpen = false;
 
   constructor(private route: ActivatedRoute, private pagesService: UdPagesService) { }
 
@@ -61,4 +65,16 @@ export class ViewEditPageComponent implements OnInit {
     );
   }
 
+  editTitle() {
+    if(!this.isOpen){
+      this.isOpen = true;
+    } else{
+      this.isOpen = false;
+    }
+  }
+
+  submitTitle() {
+    const input = document.getElementById('submitTitle');
+    console.log(document.getElementById('SubmitTitle').innerText);
+  }
 }

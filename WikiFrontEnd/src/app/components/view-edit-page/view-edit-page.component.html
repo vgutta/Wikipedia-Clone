@@ -1,8 +1,21 @@
 <ng-template [ngIf]="page | async" [ngIfElse]="loading">
 
-
-  <h2>{{ (page | async).name }}</h2>
-
+  <div>
+    <button mat-button id="editTitle" (click)="editTitle()" style="float: right;">EDIT TITLE</button>
+    
+    <h2>{{ (page | async).name }}</h2>
+    <form id="changeTitle" *ngIf=isOpen>
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+              <input matInput type="text" id="submitTitle"class="form-control mb-2" id="inlineFormInput" placeholder="New Title">
+            </div>
+            <div class="col-auto">
+              <button mat-button type="submit" (click)="submitTitle()" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </div>
+    </form>
+  </div>
+  
   <app-view-edit-section *ngFor="let section of (page | async).sections; let i = index"
     [section]="section"
     (saveModification)="sectionChanged(i, $event)"

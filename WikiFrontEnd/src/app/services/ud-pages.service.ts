@@ -33,4 +33,8 @@ export class UdPagesService {
     //return this.http.delete<Page>(`http://localhost:3542/api/pages/${pageData.name}`);
   }
 
+  deletePage(pageName: string) {
+    return this.http.delete<Page>(`http://localhost:3542/api/pages/${pageName}`); 
+  }
+
 }
