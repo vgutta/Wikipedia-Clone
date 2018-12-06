@@ -66,7 +66,8 @@ async function getPage(res, pageName) {
 }
 
 async function putPage(res, pageName, pageData) {
-  if (!isValidPageName(pageName) || !isValidPageData(pageData) || pageData.name !== pageName) return res.status(400).send();
+  console.log("Changing Title, Backend");
+  if (!isValidPageName(pageName) || !isValidPageData(pageData) /*|| pageData.name !== pageName*/) return res.status(400).send();
 
   const page = await Page.findOne({ name: pageName })
     .catch(internalServerError(res));
@@ -88,8 +89,6 @@ async function putPage(res, pageName, pageData) {
 }
 
 async function postPage(res, pageData) {
-  console.log("Entered post");
-
   if (!isValidPageData(pageData)) return res.status(400).send();
 
   const preexisting = await Page.findOne({ name: pageData.name })

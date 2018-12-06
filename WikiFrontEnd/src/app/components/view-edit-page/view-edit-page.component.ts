@@ -6,6 +6,7 @@ import { map, tap } from 'rxjs/operators';
 import { Page } from 'src/app/models/ud-pages';
 import { ViewEditSectionComponent } from '../view-edit-section/view-edit-section.component';
 import { UdPagesService } from '../../services/ud-pages.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-edit-page',
@@ -19,7 +20,7 @@ export class ViewEditPageComponent implements OnInit {
   latest: Page;
   public isOpen = false;
 
-  constructor(private route: ActivatedRoute, private pagesService: UdPagesService) { }
+  constructor(public router: Router, private route: ActivatedRoute, private pagesService: UdPagesService) { }
 
   ngOnInit() {
     this.page = this.route.data.pipe(map((x) => x.page ));
@@ -74,7 +75,17 @@ export class ViewEditPageComponent implements OnInit {
   }
 
   submitTitle() {
-    const input = document.getElementById('submitTitle');
-    console.log(document.getElementById('SubmitTitle').innerText);
+    console.log(this.latest.name);
+    const newData: Page = {
+      name: "Purnell",
+      sections: Array.from(this.latest.sections) // shallow clone
+    };
+    console.log("Starting to submit title");
+    this.pagesService.updatePage(this.latest.name, newData).subscribe(
+      () => {
+        console.log("Name updated, reloading Page");
+        this.router.navigate([`/wiki/${newData.name}`]);
+      }
+    );
   }
 }

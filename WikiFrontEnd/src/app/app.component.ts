@@ -4,8 +4,6 @@ import { UdPagesService } from './services/ud-pages.service';
 import { Observable } from 'rxjs';
 import { Page } from 'src/app/models/ud-pages';
 import { Router } from '@angular/router';
-import { ProfileComponent } from './components/profile/profile.component';
-import { Profile } from 'selenium-webdriver/firefox';
 
 @Component({
   selector: 'app-root',
