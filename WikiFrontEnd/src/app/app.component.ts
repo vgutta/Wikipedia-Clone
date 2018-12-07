@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { UdPagesService } from './services/ud-pages.service';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   page: Observable<Page>;
   profile: any;
   
